@@ -8,5 +8,5 @@ Created on Tue Sep 28 09:53:23 2021
 class Element:
     def __init__(self,position,rotation,longueur):
         self.position=position
-        self.rotation=rotation
+        self.rotation=rotation #use direct angle (trigo convention)
         self.longueur=longueur
