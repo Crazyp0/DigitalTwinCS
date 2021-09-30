@@ -8,5 +8,5 @@ from element import Element
 
 class Wall(Element):
     def __init__(self,position,rotation,longueur):
-        super().__init__(self,position,rotation,longueur)
+        super().__init__(position,rotation,longueur)
     
