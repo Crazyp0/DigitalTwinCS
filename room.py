@@ -16,7 +16,7 @@ class Room:
         self.x=x
         self.y=y
         if(len(name)>self.maxNbCharacter):
-            self.name=name[:5]
+            self.name=name[:15]
         else:
             self.name=name
     

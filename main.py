@@ -8,6 +8,7 @@ from room import Room
 from element import Element
 from wall import Wall
 import numpy as np
+from floor import Floor
 
 from bokeh.plotting import figure
 from bokeh.io import show, output_notebook
@@ -35,12 +36,22 @@ def plotRoom(r):
                  background_fill_color='white', background_fill_alpha=1.0,text_align='center')
     p.add_layout(citation)
     
+def plotFloor(f):
+    for r in f.rooms : 
+        plotRoom(r)
+    plotRoom(Room(f.longueur,f.largeur,0,0,'')) #here we plot the border of the floor
+
     
+f=Floor(300,200)
+r=Room(100,50,0,0,'Salon')
+r2=Room(50,50,0,100,'Chambre') 
+r3=Room(300,20,50,0,'couloir')
+f.addRoom(r)
+f.addRoom(r2)
+f.addRoom(r3)
 p = figure(plot_width = 600, plot_height = 600, title = 'Map', x_axis_label = 'X', y_axis_label = 'Y')
-r=Room(100,50,0,0)
-plotRoom(r)
-r2=Room(50,50,0,100) 
-plotRoom(r2)
+plotFloor(f)
+
 show(p)
     
     
