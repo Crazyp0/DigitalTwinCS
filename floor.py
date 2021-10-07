@@ -17,7 +17,7 @@ class Floor:
             print("room too large")
             return
         for r in self.rooms:
-            if((room.x>r.x+r.largeur or room.x+room.largeur<r.x or room.y>r.y+r.longueur or room.y+room.longueur<r.y)==False):
+            if((room.x>=r.x+r.largeur or room.x+room.largeur<=r.x or room.y>=r.y+r.longueur or room.y+room.longueur<=r.y)==False):
                 print("impossible to add this room")
                 return
         self.rooms.append(room)
