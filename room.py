@@ -8,12 +8,17 @@ from wall import Wall
 import numpy as np
 
 class Room:
-    def __init__(self,longueur,largeur,x,y):
+    def __init__(self,longueur,largeur,x,y,name):
+        self.maxNbCharacter=5
         self.id=0
         self.largeur=largeur
         self.longueur=longueur
         self.x=x
         self.y=y
+        if(len(name)>self.maxNbCharacter):
+            self.name=name[:5]
+        else:
+            self.name=name
     
     def generateWall(self):
         list_of_wall=[]
