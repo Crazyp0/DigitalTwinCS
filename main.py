@@ -14,6 +14,11 @@ from bokeh.plotting import figure
 from bokeh.io import show, output_notebook
 from bokeh.models import Label
 
+global height_plot
+
+height_plot=600
+
+
 
 def plotWall(w):
     x0,y0=w.position
@@ -41,7 +46,12 @@ def plotFloor(f):
         plotRoom(r)
     plotRoom(Room(f.longueur,f.largeur,0,0,'')) #here we plot the border of the floor
 
+def generatePeople(nb_people):
+    people=np.random.rand(nb_people,2)*height_plot
+    return people
+
     
+
 f=Floor(300,200)
 r=Room(100,50,0,0,'Salon')
 r2=Room(50,50,50,100,'Chambre') 
@@ -51,7 +61,7 @@ f.addRoom(r)
 f.addRoom(r2)
 f.addRoom(r3)
 f.addRoom(r4)
-p = figure(plot_width = 600, plot_height = 600, title = 'Map', x_axis_label = 'X', y_axis_label = 'Y')
+p = figure(plot_width = height_plot, plot_height = height_plot, title = 'Map', x_axis_label = 'X', y_axis_label = 'Y')
 plotFloor(f)
 
 show(p)
