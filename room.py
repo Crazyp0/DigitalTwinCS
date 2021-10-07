@@ -9,14 +9,14 @@ import numpy as np
 
 class Room:
     def __init__(self,longueur,largeur,x,y,name):
-        self.maxNbCharacter=5
+        self.maxNbCharacter=15
         self.id=0
         self.largeur=largeur
         self.longueur=longueur
         self.x=x
         self.y=y
         if(len(name)>self.maxNbCharacter):
-            self.name=name[:15]
+            self.name=name[:self.maxNbCharacter]
         else:
             self.name=name
     
