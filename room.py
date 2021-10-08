@@ -15,7 +15,7 @@ class Direction(Enum):
     EST=3
 
 class Room:
-    def __init__(self,longueur,largeur,x,y,name):
+    def __init__(self,longueur,largeur,x,y,name,*nbpeople):
         self.maxNbCharacter=15
         self.id=0
         self.largeur=largeur
@@ -23,6 +23,7 @@ class Room:
         self.x=x
         self.y=y
         self.list_of_wall=[]
+        self.nbpeople=0
         if(len(name)>self.maxNbCharacter):
             self.name=name[:self.maxNbCharacter]
         else:
@@ -43,5 +44,7 @@ class Room:
           
     def area(self):
         return self.longueur*self.largeur
-        
+    
+    def setNbPeople(self, nbpeople):
+        self.nbpeople=nbpeople
 

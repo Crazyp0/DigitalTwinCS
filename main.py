@@ -17,6 +17,7 @@ from bokeh.plotting import figure
 from bokeh.io import show, output_notebook
 from bokeh.models import Label
 
+#pip install bokeh==2.2.2
 
 
 
@@ -64,7 +65,7 @@ f=Floor(300,200)
 r=Room(100,50,0,0,'Salon')
 r2=Room(50,50,0,100,'Chambre') 
 r3=Room(300,20,50,0,'couloir')
-r4=Room(50,100,25,125,'test')
+r4=Room(50,100,100,125,'test')
 f.addRoom(r)
 f.addRoom(r2)
 f.addRoom(r3)
@@ -72,22 +73,27 @@ f.addRoom(r4)
 
 
 nbPeople =st.slider("Number of people in the floor", min_value=0,max_value=100, value=50)
-
 people=generatePeople(nbPeople,[200,300])
 
 p = figure(plot_width = 600, plot_height = 600, title = 'Map', x_axis_label = 'X', y_axis_label = 'Y')
 plotFloor(f)
 
-
 r.addDoorOnAWall(25, 15, Direction['NORTH'].value)
-print(r.list_of_wall[Direction['NORTH'].value].doors)
 plotDoor(r.list_of_wall[Direction['NORTH'].value].doors[0])
 
 p.circle(x=people[:,0],y=people[:,1])
 
 st.bokeh_chart(p)
+  
+  
+for i in f.rooms : 
+     somme=0
+     for k in people : 
+         if k[0]>=i.x and k[0]<=i.x+i.largeur and k[1]>=i.y and k[1]<=i.y+i.longueur : 
+             somme+=1
+     i.setNbPeople(somme)
+     st.metric(i.name,'{} people'.format(i.nbpeople))
     
-    
-    
-    
+
+  
     
