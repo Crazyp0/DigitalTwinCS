@@ -17,9 +17,6 @@ from bokeh.plotting import figure
 from bokeh.io import show, output_notebook
 from bokeh.models import Label
 
-global height_plot
-
-height_plot=600
 
 
 
@@ -49,8 +46,10 @@ def plotFloor(f):
         plotRoom(r)
     plotRoom(Room(f.longueur,f.largeur,0,0,'')) #here we plot the border of the floor
 
-def generatePeople(nb_people):
-    people=np.random.rand(nb_people,2)*height_plot
+def generatePeople(nb_people,size):
+    people=np.random.rand(nb_people,2)
+    people[:,0]=people[:,0]*size[0]
+    people[:,1]=people[:,1]*size[1]
     return people
 
 def plotDoor(d) :   
@@ -71,15 +70,15 @@ f.addRoom(r2)
 f.addRoom(r3)
 f.addRoom(r4)
 
-#r.addDoorOnAWall(0.5,5,Direction.EST)
+r.addDoorOnAWall(0.5,5,Direction['EST'].value)
 
 nbPeople =st.slider("Number of people in the floor", min_value=0,max_value=100, value=50)
 
-people=generatePeople(nbPeople)
+people=generatePeople(nbPeople,[200,300])
 
-p = figure(plot_width = height_plot, plot_height = height_plot, title = 'Map', x_axis_label = 'X', y_axis_label = 'Y')
+p = figure(plot_width = 600, plot_height = 600, title = 'Map', x_axis_label = 'X', y_axis_label = 'Y')
 plotFloor(f)
-#plotDoor(r.listOfWall[Direction.EST].doors[0])
+plotDoor(r.listOfWall[Direction['EST'].value].doors[0])
 
 p.circle(x=people[:,0],y=people[:,1])
 
