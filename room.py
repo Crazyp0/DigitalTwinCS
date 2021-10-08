@@ -22,7 +22,7 @@ class Room:
         self.longueur=longueur
         self.x=x
         self.y=y
-        self.listOfWall=[]
+        self.list_of_wall=[]
         if(len(name)>self.maxNbCharacter):
             self.name=name[:self.maxNbCharacter]
         else:
@@ -36,8 +36,8 @@ class Room:
         return self.list_of_wall
     
     def addDoorOnAWall(self,positionOnWall,longueurDoor,direction):
-        if(self.listOfWall[direction]!=None):
-            self.listOfWall[direction].addDoorOnAWall(positionOnWall,longueurDoor)
+        if(self.list_of_wall[direction]!=None):
+            self.list_of_wall[direction].addDoorOnAWall(positionOnWall,longueurDoor)
           
     def area(self):
         return self.longueur*self.largeur
