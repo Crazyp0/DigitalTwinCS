@@ -58,7 +58,7 @@ def plotDoor(d) :
     rot=d.rotation #we use direct angles (with trigonometry conventions)
     x1=l*np.cos(rot)+x0   
     y1=l*np.sin(rot)+y0
-    p.line([x0, x1], [y0, y1],line_width=5)
+    p.line([x0, x1], [y0, y1],line_width=5, color='red')
     
 f=Floor(300,200)
 r=Room(100,50,0,0,'Salon')
@@ -70,7 +70,6 @@ f.addRoom(r2)
 f.addRoom(r3)
 f.addRoom(r4)
 
-r.addDoorOnAWall(0.5,5,Direction['EST'].value)
 
 nbPeople =st.slider("Number of people in the floor", min_value=0,max_value=100, value=50)
 
@@ -78,7 +77,11 @@ people=generatePeople(nbPeople,[200,300])
 
 p = figure(plot_width = 600, plot_height = 600, title = 'Map', x_axis_label = 'X', y_axis_label = 'Y')
 plotFloor(f)
-plotDoor(r.listOfWall[Direction['EST'].value].doors[0])
+
+
+r.addDoorOnAWall(25, 15, Direction['NORTH'].value)
+print(r.list_of_wall[Direction['NORTH'].value].doors)
+plotDoor(r.list_of_wall[Direction['NORTH'].value].doors[0])
 
 p.circle(x=people[:,0],y=people[:,1])
 

@@ -37,7 +37,9 @@ class Room:
     
     def addDoorOnAWall(self,positionOnWall,longueurDoor,direction):
         if(self.list_of_wall[direction]!=None):
-            self.list_of_wall[direction].addDoorOnAWall(positionOnWall,longueurDoor)
+            print("test")
+            self.list_of_wall[direction].addDoor(positionOnWall,longueurDoor)
+            
           
     def area(self):
         return self.longueur*self.largeur
