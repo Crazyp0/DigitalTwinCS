@@ -7,10 +7,11 @@ Created on Thu Oct  7 10:56:26 2021
 from room import Room
 
 class Floor:
-    def __init__(self,longueur,largeur):
+    def __init__(self,longueur,largeur,num):
         self.longueur=longueur
         self.largeur=largeur
         self.rooms=[]
+        self.FloorNb=num
         
     def addRoom(self,room):
         if(room.x+room.largeur>self.largeur or room.y+room.longueur>self.longueur):
