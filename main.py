@@ -79,7 +79,7 @@ p = figure(plot_width = 600, plot_height = 600, title = 'Map', x_axis_label = 'X
 plotFloor(f)
 
 
-r.addDoorOnAWall(25, 15, Direction['NORTH'].value)
+r.addDoorOnAWall(8, 15, Direction['NORTH'].value)
 print(r.list_of_wall[Direction['NORTH'].value].doors)
 plotDoor(r.list_of_wall[Direction['NORTH'].value].doors[0])
 

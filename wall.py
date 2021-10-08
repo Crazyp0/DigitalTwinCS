@@ -13,7 +13,9 @@ class Wall(Element):
         super().__init__(position,rotation,longueur)
         self.doors=[]
     def addDoor(self,positionOnWall,longueurDoor):
-        print(self.rotation)
+        if(positionOnWall+longueurDoor/2>self.longueur or positionOnWall-longueurDoor/2<0):
+            print('impossible to add Door')
+            return
         if self.rotation==np.pi/2:
             self.doors.append(Door((self.position[0],self.position[1]+positionOnWall-longueurDoor/2),self.rotation,longueurDoor))
         elif self.rotation==-np.pi/2:
