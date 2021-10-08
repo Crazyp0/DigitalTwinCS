@@ -70,8 +70,8 @@ f.addRoom(r)
 f.addRoom(r2)
 f.addRoom(r3)
 f.addRoom(r4)
-
-
+floors=(1,2,3)
+option=st.sidebar.selectbox('select floor',floors)
 nbPeople =st.slider("Number of people in the floor", min_value=0,max_value=100, value=50)
 people=generatePeople(nbPeople,[200,300])
 
@@ -85,14 +85,14 @@ p.circle(x=people[:,0],y=people[:,1])
 
 st.bokeh_chart(p)
   
-  
+st.sidebar.write("Affluence of people in the floor:")
 for i in f.rooms : 
      somme=0
      for k in people : 
          if k[0]>=i.x and k[0]<=i.x+i.largeur and k[1]>=i.y and k[1]<=i.y+i.longueur : 
              somme+=1
      i.setNbPeople(somme)
-     st.metric(i.name,'{} people'.format(i.nbpeople))
+     st.sidebar.write('{}: {} people'.format(i.name,i.nbpeople))
     
 
   
