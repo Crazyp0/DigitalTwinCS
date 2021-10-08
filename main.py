@@ -9,6 +9,9 @@ from element import Element
 from wall import Wall
 import numpy as np
 from floor import Floor
+from room import Direction
+import streamlit as st
+
 
 from bokeh.plotting import figure
 from bokeh.io import show, output_notebook
@@ -60,7 +63,7 @@ def plotDoor(d) :
     
 f=Floor(300,200)
 r=Room(100,50,0,0,'Salon')
-r2=Room(50,50,50,100,'Chambre') 
+r2=Room(50,50,0,100,'Chambre') 
 r3=Room(300,20,50,0,'couloir')
 r4=Room(50,100,25,125,'test')
 f.addRoom(r)
@@ -68,12 +71,19 @@ f.addRoom(r2)
 f.addRoom(r3)
 f.addRoom(r4)
 
+#r.addDoorOnAWall(0.5,5,Direction.EST)
 
+nbPeople =st.slider("Number of people in the floor", min_value=0,max_value=100, value=50)
+
+people=generatePeople(nbPeople)
 
 p = figure(plot_width = height_plot, plot_height = height_plot, title = 'Map', x_axis_label = 'X', y_axis_label = 'Y')
 plotFloor(f)
+#plotDoor(r.listOfWall[Direction.EST].doors[0])
 
-show(p)
+p.circle(x=people[:,0],y=people[:,1])
+
+st.bokeh_chart(p)
     
     
     
