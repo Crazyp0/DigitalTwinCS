@@ -50,8 +50,14 @@ def generatePeople(nb_people):
     people=np.random.rand(nb_people,2)*height_plot
     return people
 
+def plotDoor(d) :   
+    x0,y0=d.position
+    l=d.longueur
+    rot=d.rotation #we use direct angles (with trigonometry conventions)
+    x1=l*np.cos(rot)+x0   
+    y1=l*np.sin(rot)+y0
+    p.line([x0, x1], [y0, y1],line_width=5)
     
-
 f=Floor(300,200)
 r=Room(100,50,0,0,'Salon')
 r2=Room(50,50,50,100,'Chambre') 
@@ -61,6 +67,9 @@ f.addRoom(r)
 f.addRoom(r2)
 f.addRoom(r3)
 f.addRoom(r4)
+
+
+
 p = figure(plot_width = height_plot, plot_height = height_plot, title = 'Map', x_axis_label = 'X', y_axis_label = 'Y')
 plotFloor(f)
 
