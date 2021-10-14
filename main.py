@@ -61,7 +61,7 @@ def plotDoor(d) :
     y1=l*np.sin(rot)+y0
     p.line([x0, x1], [y0, y1],line_width=5, color='red')
     
-f=Floor(300,200)
+f=Floor(300,200,1)
 r=Room(100,50,0,0,'Salon')
 r2=Room(50,50,0,100,'Chambre') 
 r3=Room(300,20,50,0,'couloir')
@@ -72,7 +72,7 @@ f.addRoom(r3)
 f.addRoom(r4)
 floors=(1,2,3)
 option=st.sidebar.selectbox('select floor',floors)
-nbPeople =st.slider("Number of people in the floor", min_value=0,max_value=100, value=50)
+nbPeople =st.slider("Number of people in the floor", min_value=0,max_value=1000, value=50)
 people=generatePeople(nbPeople,[200,300])
 
 p = figure(plot_width = 600, plot_height = 600, title = 'Map', x_axis_label = 'X', y_axis_label = 'Y')
