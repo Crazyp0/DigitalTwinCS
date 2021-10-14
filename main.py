@@ -10,6 +10,7 @@ from wall import Wall
 import numpy as np
 from floor import Floor
 from room import Direction
+from building import Building
 import streamlit as st
 
 
@@ -61,7 +62,11 @@ def plotDoor(d) :
     y1=l*np.sin(rot)+y0
     p.line([x0, x1], [y0, y1],line_width=5, color='red')
     
+b=Building()
 f=Floor(300,200,1)
+b.addOrModifyFloor(f)
+f2=Floor(200,200,2)
+b.addOrModifyFloor(f2)
 r=Room(100,50,0,0,'Salon')
 r2=Room(50,50,0,100,'Chambre') 
 r3=Room(300,20,50,0,'couloir')
@@ -70,17 +75,21 @@ f.addRoom(r)
 f.addRoom(r2)
 f.addRoom(r3)
 f.addRoom(r4)
-floors=(1,2,3)
-option=st.sidebar.selectbox('select floor',floors)
+f2.addRoom(r)
+f2.addRoom(r2)
+f2.addRoom(r3)
+list_floors=[i.floorNb for i in b.floors]
+option=st.sidebar.selectbox('select floor',list_floors)
 nbPeople =st.slider("Number of people in the floor", min_value=0,max_value=1000, value=50)
-people=generatePeople(nbPeople,[200,300])
+
 
 p = figure(plot_width = 600, plot_height = 600, title = 'Map', x_axis_label = 'X', y_axis_label = 'Y')
-plotFloor(f)
+plotFloor(b.floors[option-1])
 
 r.addDoorOnAWall(25, 15, Direction['NORTH'].value)
 plotDoor(r.list_of_wall[Direction['NORTH'].value].doors[0])
 
+people=generatePeople(nbPeople,[b.floors[option-1].largeur,b.floors[option-1].longueur])  
 p.circle(x=people[:,0],y=people[:,1])
 
 st.bokeh_chart(p)

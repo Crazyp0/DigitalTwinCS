@@ -11,7 +11,7 @@ class Floor:
         self.longueur=longueur
         self.largeur=largeur
         self.rooms=[]
-        self.FloorNb=num
+        self.floorNb=num
         
     def addRoom(self,room):
         if(room.x+room.largeur>self.largeur or room.y+room.longueur>self.longueur):
