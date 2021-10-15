@@ -102,12 +102,11 @@ f.addRoom(r3)
 f.addRoom(r4)
 f2.addRoom(r)
 f2.addRoom(r2)
-f2.addRoom(r3)
 list_floors=[i.floorNb for i in b.floors]
 nbPeople=np.zeros(len(list_floors))
 option=st.sidebar.selectbox('select floor',list_floors)
 for k in range(len(list_floors)):
-    nbPeople[k] =st.slider("Number of people in the floor{}".format(k+1), min_value=0,max_value=1000, value=50)
+    nbPeople[k] =st.slider("Number of people in the floor{}".format(k+1), min_value=0,max_value=1000, value=200)
 
 
 p = figure(plot_width = 600, plot_height = 600, title = 'Map', x_axis_label = 'X', y_axis_label = 'Y')
@@ -117,26 +116,28 @@ r.addDoorOnAWall(25, 15, Direction['NORTH'].value)
 plotDoor(r.list_of_wall[Direction['NORTH'].value].doors[0])
 
 people=generatePeople2(nbPeople,b.floors)  
-p.circle(x=people[people['floor']==option]['x'],y=people[people['floor']==option]['y'])
+people_floor=people[people['floor']==option]
+p.circle(x=people_floor['x'],y=people_floor['y'])
 
-st.bokeh_chart(p)
+
 
 st.sidebar.write("Affluence of people in the floor:")
+colors=['red','blue','yellow']
 for i in b.floors[option-1].rooms :
-#for i in f.rooms : 
-    somme=sum(people[people['floor']==option]['room']==i.name)
+    somme=sum(people_floor['room']==i.name)
     i.setNbPeople(somme)
     st.sidebar.write('{}: {} people'.format(i.name,i.nbpeople))
+    if somme>2: 
+        clusters=3
+    else :
+        clusters=somme
+    kmeans = KMeans(n_clusters=clusters, random_state=0)
+    people_room=people_floor[people_floor['room']==i.name]
+    kmeans.fit(people_room[['x','y']])
     
-#      somme=0
-     
-#      for k in people : 
-#          if k[0]>=i.x and k[0]<=i.x+i.largeur and k[1]>=i.y and k[1]<=i.y+i.longueur : 
-#              somme+=1
-             
-#      i.setNbPeople(somme)
-#      st.sidebar.write('{}: {} people'.format(i.name,i.nbpeople))
+    people_clustered=people_room.copy()
+    people_clustered['cluster']=kmeans.labels_
+    for k in range(clusters):
+        p.circle(x=people_clustered[people_clustered['cluster']==k]['x'],y=people_clustered[people_clustered['cluster']==k]['y'],color=colors[k])
     
-
-  
-    
+st.bokeh_chart(p)
