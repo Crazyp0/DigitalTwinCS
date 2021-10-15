@@ -87,21 +87,60 @@ def plotDoor(d) :
     y1=l*np.sin(rot)+y0
     p.line([x0, x1], [y0, y1],line_width=5, color='red')
     
+
+# b=Building()
+# f=Floor(300,200,1)
+# b.addOrModifyFloor(f)
+# f2=Floor(200,200,2)
+# b.addOrModifyFloor(f2)
+# r=Room(100,50,0,0,'Salon')
+# r2=Room(50,50,0,100,'Chambre') 
+# r3=Room(300,20,50,0,'couloir')
+# r4=Room(50,100,100,125,'test')
+# f.addRoom(r)
+# f.addRoom(r2)
+# f.addRoom(r3)
+# f.addRoom(r4)
+# f2.addRoom(r)
+# f2.addRoom(r2)
+
+
 b=Building()
-f=Floor(300,200,1)
+f=Floor(200,300,1)
 b.addOrModifyFloor(f)
-f2=Floor(200,200,2)
+f2=Floor(200,300,2)
 b.addOrModifyFloor(f2)
-r=Room(100,50,0,0,'Salon')
-r2=Room(50,50,0,100,'Chambre') 
-r3=Room(300,20,50,0,'couloir')
-r4=Room(50,100,100,125,'test')
+r=Room(100,70,0,0,'Chambre')
+r2=Room(100,70,0,100,'bureau') 
+r3=Room(200,30,70,0,'couloir')
+r4=Room(100,200,100,0,'salon')
+r5=Room(50,50,100,100,'Couloir2') 
+r6=Room(50,50,100,150,'ascenseur')
+r7=Room(100,150,150,100,'cuisine')
+
+r8=Room(200,100,0,0,'Chambre')
+r9=Room(150,50,100,0,'hub') 
+r10=Room(100,50,200,0,'sas')
+r11=Room(50,100,200,0,'chambre2')
+r12=Room(50,100,200,50,'chambre3') 
+r13=Room(100,150,200,100,'salle de bain')
+
 f.addRoom(r)
 f.addRoom(r2)
 f.addRoom(r3)
 f.addRoom(r4)
-f2.addRoom(r)
-f2.addRoom(r2)
+f.addRoom(r5)
+f.addRoom(r6)
+f.addRoom(r7)
+
+f2.addRoom(r8)
+f2.addRoom(r9)
+f2.addRoom(r10)
+f2.addRoom(r11)
+f2.addRoom(r12)
+f2.addRoom(r13)
+f2.addRoom(r6)
+
 list_floors=[i.floorNb for i in b.floors]
 nbPeople=np.zeros(len(list_floors))
 option=st.sidebar.selectbox('select floor',list_floors)
@@ -112,8 +151,8 @@ for k in range(len(list_floors)):
 p = figure(plot_width = 600, plot_height = 600, title = 'Map', x_axis_label = 'X', y_axis_label = 'Y')
 plotFloor(b.floors[option-1])
 
-r.addDoorOnAWall(25, 15, Direction['NORTH'].value)
-plotDoor(r.list_of_wall[Direction['NORTH'].value].doors[0])
+#r.addDoorOnAWall(25, 15, Direction['NORTH'].value)
+#plotDoor(r.list_of_wall[Direction['NORTH'].value].doors[0])
 
 people=generatePeople2(nbPeople,b.floors)  
 people_floor=people[people['floor']==option]
@@ -133,11 +172,12 @@ for i in b.floors[option-1].rooms :
         clusters=somme
     kmeans = KMeans(n_clusters=clusters, random_state=0)
     people_room=people_floor[people_floor['room']==i.name]
-    kmeans.fit(people_room[['x','y']])
-    
-    people_clustered=people_room.copy()
-    people_clustered['cluster']=kmeans.labels_
-    for k in range(clusters):
-        p.circle(x=people_clustered[people_clustered['cluster']==k]['x'],y=people_clustered[people_clustered['cluster']==k]['y'],color=colors[k])
-    
+    if len(people_room)>0:
+        kmeans.fit(people_room[['x','y']])
+        
+        people_clustered=people_room.copy()
+        people_clustered['cluster']=kmeans.labels_
+        for k in range(clusters):
+            p.circle(x=people_clustered[people_clustered['cluster']==k]['x'],y=people_clustered[people_clustered['cluster']==k]['y'],color=colors[k])
+        
 st.bokeh_chart(p)
