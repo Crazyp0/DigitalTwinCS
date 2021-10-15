@@ -71,12 +71,12 @@ def generatePeople2(nb_people,list_floors):
         people_floor['x'][:]=samples[:,0]*size[1]
         people_floor['y'][:]=samples[:,1]*size[0]
         people_floor['floor'][:]=list_floors[i].floorNb
-        peoples=pd.concat([peoples,people_floor])
+        print(people_floor)
         for k in list_floors[i].rooms :
-            for j in range(len(peoples)):
-                if peoples['x'][j]>=k.x and peoples['x'][j]<=k.x+k.largeur and peoples['y'][j]>=k.y and peoples['y'][j]<=k.y+k.longueur : 
-                    peoples.at[j,'room']=k.name
-
+            for j in range(min_index,min_index+int(nb_people[i])):
+                if people_floor['x'][j]>=k.x and people_floor['x'][j]<=k.x+k.largeur and people_floor['y'][j]>=k.y and people_floor['y'][j]<=k.y+k.longueur : 
+                    people_floor.at[j,'room']=k.name
+        peoples=pd.concat([peoples,people_floor])
     return peoples
 
 def plotDoor(d) :   
@@ -120,10 +120,10 @@ r7=Room(100,150,150,100,'cuisine')
 
 r8=Room(200,100,0,0,'Chambre')
 r9=Room(150,50,100,0,'hub') 
-r10=Room(100,50,200,0,'sas')
+r10=Room(100,50,150,0,'sas')
 r11=Room(50,100,200,0,'chambre2')
 r12=Room(50,100,200,50,'chambre3') 
-r13=Room(100,150,200,100,'salle de bain')
+r13=Room(100,150,150,100,'salle de bain')
 
 f.addRoom(r)
 f.addRoom(r2)
