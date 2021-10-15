@@ -18,6 +18,10 @@ from bokeh.plotting import figure
 from bokeh.io import show, output_notebook
 from bokeh.models import Label
 
+import pandas as pd
+
+from sklearn.cluster import KMeans
+
 #pip install bokeh==2.2.2
 
 
@@ -54,6 +58,27 @@ def generatePeople(nb_people,size):
     people[:,1]=people[:,1]*size[1]
     return people
 
+def generatePeople2(nb_people,list_floors):
+    peoples=pd.DataFrame(columns=['x','y','floor','room'])
+    for i in range(len(list_floors)) :
+        if i==0 :
+            min_index=0
+        else :
+            min_index=int(sum(nb_people[:i]))
+        people_floor=pd.DataFrame(columns=['x','y','floor','room'], index=[i for i in range(min_index,min_index+int(nb_people[i]))])
+        size=(list_floors[i].longueur,list_floors[i].largeur)
+        samples=np.random.rand(int(nb_people[i]),2)
+        people_floor['x'][:]=samples[:,0]*size[1]
+        people_floor['y'][:]=samples[:,1]*size[0]
+        people_floor['floor'][:]=list_floors[i].floorNb
+        peoples=pd.concat([peoples,people_floor])
+        for k in list_floors[i].rooms :
+            for j in range(len(peoples)):
+                if peoples['x'][j]>=k.x and peoples['x'][j]<=k.x+k.largeur and peoples['y'][j]>=k.y and peoples['y'][j]<=k.y+k.longueur : 
+                    peoples.at[j,'room']=k.name
+
+    return peoples
+
 def plotDoor(d) :   
     x0,y0=d.position
     l=d.longueur
@@ -79,8 +104,10 @@ f2.addRoom(r)
 f2.addRoom(r2)
 f2.addRoom(r3)
 list_floors=[i.floorNb for i in b.floors]
+nbPeople=np.zeros(len(list_floors))
 option=st.sidebar.selectbox('select floor',list_floors)
-nbPeople =st.slider("Number of people in the floor", min_value=0,max_value=1000, value=50)
+for k in range(len(list_floors)):
+    nbPeople[k] =st.slider("Number of people in the floor{}".format(k+1), min_value=0,max_value=1000, value=50)
 
 
 p = figure(plot_width = 600, plot_height = 600, title = 'Map', x_axis_label = 'X', y_axis_label = 'Y')
@@ -89,19 +116,26 @@ plotFloor(b.floors[option-1])
 r.addDoorOnAWall(25, 15, Direction['NORTH'].value)
 plotDoor(r.list_of_wall[Direction['NORTH'].value].doors[0])
 
-people=generatePeople(nbPeople,[b.floors[option-1].largeur,b.floors[option-1].longueur])  
-p.circle(x=people[:,0],y=people[:,1])
+people=generatePeople2(nbPeople,b.floors)  
+p.circle(x=people[people['floor']==option]['x'],y=people[people['floor']==option]['y'])
 
 st.bokeh_chart(p)
-  
+
 st.sidebar.write("Affluence of people in the floor:")
-for i in f.rooms : 
-     somme=0
-     for k in people : 
-         if k[0]>=i.x and k[0]<=i.x+i.largeur and k[1]>=i.y and k[1]<=i.y+i.longueur : 
-             somme+=1
-     i.setNbPeople(somme)
-     st.sidebar.write('{}: {} people'.format(i.name,i.nbpeople))
+for i in b.floors[option-1].rooms :
+#for i in f.rooms : 
+    somme=sum(people[people['floor']==option]['room']==i.name)
+    i.setNbPeople(somme)
+    st.sidebar.write('{}: {} people'.format(i.name,i.nbpeople))
+    
+#      somme=0
+     
+#      for k in people : 
+#          if k[0]>=i.x and k[0]<=i.x+i.largeur and k[1]>=i.y and k[1]<=i.y+i.longueur : 
+#              somme+=1
+             
+#      i.setNbPeople(somme)
+#      st.sidebar.write('{}: {} people'.format(i.name,i.nbpeople))
     
 
   
