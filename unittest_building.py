@@ -1,4 +1,3 @@
-from room import Room
 import unittest
 from floor import Floor
 from building import Building

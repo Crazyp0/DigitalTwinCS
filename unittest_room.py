@@ -1,8 +1,6 @@
-from room import Room
-#from element import Element
 import unittest
+from room import Room
 from floor import Floor
-from wall import Wall
 from room import Direction
 
 class DigitalTestRoom(unittest.TestCase):

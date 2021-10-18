@@ -1,6 +1,6 @@
-from room import Room
 import unittest
 from floor import Floor
+from room import Room
 
 
 class DigitalTestFloor(unittest.TestCase):
