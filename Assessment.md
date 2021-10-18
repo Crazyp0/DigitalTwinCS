@@ -3,20 +3,20 @@ Please copy the content of this form to your own repository and tick ([X]) the b
 
 # Git
 
-[ ] I use git to store (only) the source code of my project.
+[x] I use git to store (only) the source code of my project.
 
-[ ] I configured the git `.ignore` file.
+[x] I configured the git `.ignore` file.
 
-[ ] I made a commit per atomic change to the file of the project. Example:
+[x] I made a commit per atomic change to the file of the project. Example: we commit when we add something new, or when we want to try with both our parts at the same time.
 
-[ ] I use meaningful commit message by following guidelines. Example:
+[x] I use meaningful commit message by following guidelines. Example: feat: add something
 
-[ ] Both me and my pair are contributing to a shared repository.
+[x] Both me and my pair are contributing to a shared repository.
 
 
 # Python programming
 
-[ ] I use object-oriented Python to develop my project. 
+[x] I use object-oriented Python to develop my project. 
 
 [ ] I document the code of my project.
 
@@ -25,11 +25,11 @@ Please copy the content of this form to your own repository and tick ([X]) the b
 
 # Test-driven development
 
-[ ] I include some tests with my project. 
+[x] I include some tests with my project. 
 
 [ ] My tests cover all the source code developed.
 
-[ ] I apply principles of TDD to develop my code.
+[x] I apply principles of TDD to develop my code.
 
 
 # Software architecture
