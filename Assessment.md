@@ -18,7 +18,7 @@ Please copy the content of this form to your own repository and tick ([X]) the b
 
 [x] I use object-oriented Python to develop my project. 
 
-[ ] I document the code of my project.
+[x] I document the code of my project.
 
 [ ] I document the project itself.
 
@@ -27,13 +27,13 @@ Please copy the content of this form to your own repository and tick ([X]) the b
 
 [x] I include some tests with my project. 
 
-[ ] My tests cover all the source code developed.
+[x] My tests cover all the source code developed.
 
 [x] I apply principles of TDD to develop my code.
 
 
 # Software architecture
 
-[ ] I follow the clean code rules. 
+[x] I follow the clean code rules. 
 
 [ ] I use and document some design patterns in my project. Examples
