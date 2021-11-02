@@ -15,6 +15,20 @@ class PeopleManager:
         self.uiMng=uiMng
     
     def generatePeople(self,nb_people,list_floors):
+        """
+        Parameters
+        ----------
+        nb_people : Array 
+            Array containing the number of people that are on each floor.
+        list_floors : Array
+            Array containing each floor.
+
+        Returns
+        -------
+        None.
+        Generate random people in the floors, and calculate in each room they are.
+
+        """
         self.peoples=pd.DataFrame(columns=['x','y','floor','room'])
         for i in range(len(list_floors)) :
             if i==0 :
@@ -34,6 +48,22 @@ class PeopleManager:
             self.peoples=pd.concat([self.peoples,people_floor])
     
     def calculateCluster(self,b,option):
+        """
+        
+
+        Parameters
+        ----------
+        b : Building
+            Building containing all the floors.
+        option : INT
+            Integer representing the floor that is selected.
+
+        Returns
+        -------
+        None.
+        Calculate the 3 clusters that are in each room of the floor and plot them in different colors
+
+        """
         people_floor=self.peoples[self.peoples['floor']==option]
         for i in b.floors[option-1].rooms :
             somme=sum(people_floor['room']==i.name)

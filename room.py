@@ -71,7 +71,6 @@ class Room:
             Can use Direction['NORTH'].value if want to display the door on the north wall.
         """
         if(self.list_of_wall[direction]!=None):
-            print("test")
             self.list_of_wall[direction].addDoor(positionOnWall,longueurDoor)
             
           

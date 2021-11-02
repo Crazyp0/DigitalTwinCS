@@ -5,11 +5,18 @@ from room import Direction
 
 class DigitalTestRoom(unittest.TestCase):
     def test_area(self):
+        """
+        Test if the area is weel computed
+        """
         r=Room(100,50,0,0,'bedroom')
         self.assertEqual(r.area(),5000)
         self.assertEqual(r.largeur,50)
         
     def test_room(self):
+        """
+        Test if the requirements to put a room on a floor are respected (if it is not on another room)
+
+        """
         f=Floor(300,200,1)
         r=Room(100,50,0,0,'Salon')
         r2=Room(50,50,50,100,'Chambre') 
@@ -23,7 +30,11 @@ class DigitalTestRoom(unittest.TestCase):
         for i in f.rooms :
             names.append(i.name)
         self.assertEqual(names,['Salon','Chambre'])
+        
     def test_wall(self):
+        """
+        Test if each room has 4 walls.
+        """
         f=Floor(300,200,1)
         r=Room(100,50,0,0,'Salon')
         r2=Room(50,50,50,100,'Chambre') 
@@ -41,6 +52,9 @@ class DigitalTestRoom(unittest.TestCase):
             self.assertEqual(len(i.list_of_wall),4)
     
     def test_door(self):
+        """
+        Test if the door if put on the wall
+        """
         f=Floor(300,200,1)
         r=Room(100,50,0,0,'Salon')
         f.addRoom(r)
@@ -49,6 +63,10 @@ class DigitalTestRoom(unittest.TestCase):
         self.assertEqual(len(r.list_of_wall[Direction.NORTH.value].doors),1)
     
     def test_nbpeople(self):
+        """
+        Test if the number of people is well assigned.
+
+        """
         nbpeople=50
         f=Floor(300,200,1)
         r=Room(100,50,0,0,'Salon')

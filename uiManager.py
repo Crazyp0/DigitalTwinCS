@@ -19,9 +19,30 @@ class UiManager:
         self.option=st.sidebar.selectbox('select floor',self.list_floors)
         
     def getOption(self):
+        """
+        Returns
+        -------
+        INT
+            floor that is selected by the sidebar.
+
+        """
         return self.option
     
     def plotWall(self,w):
+        """
+        
+
+        Parameters
+        ----------
+        w : Wall
+            Wall of the room that we want to plot.
+
+        Returns
+        -------
+        None.
+        Plot the wall on the figure
+    
+        """
         x0,y0=w.position
         l=w.longueur
         rot=w.rotation #we use direct angles (with trigonometry conventions)
@@ -31,6 +52,18 @@ class UiManager:
        
         
     def plotRoom(self,r):
+        """
+        Parameters
+        ----------
+        r : Room
+            Room that we want to plot.
+
+        Returns
+        -------
+        None.
+        Plot the Room on the figure.
+
+        """
         list_wall=r.generateWall()
         for i in list_wall:
             self.plotWall(i)
@@ -43,11 +76,35 @@ class UiManager:
         self.fig.add_layout(citation)
         
     def plotFloor(self,f):
+        """
+        Parameters
+        ----------
+        f : Floor
+            Floor that we want to plot.
+
+        Returns
+        -------
+        None.
+        Plot the floor on the figure.
+    
+        """
         for r in f.rooms : 
             self.plotRoom(r)
         self.plotRoom(Room(f.longueur,f.largeur,0,0,'')) #here we plot the border of the floor
         
     def plotDoor(self,d) :   
+        """
+        Parameters
+        ----------
+        d : Door
+            Door that we want to plot.
+
+        Returns
+        -------
+        None.
+        Plot the door on the figure.
+
+        """
         x0,y0=d.position
         l=d.longueur
         rot=d.rotation #we use direct angles (with trigonometry conventions)
@@ -56,10 +113,47 @@ class UiManager:
         self.fig.line([x0, x1], [y0, y1],line_width=5, color='red')
     
     def drawCircle(self,a,b,c):
+        """
+        Parameters
+        ----------
+        a : Array or List or Serie
+            Array representing the x-axis of the data that we want to plot.
+        b : Array of list of Serie
+            Array representing the y-axis of the data that we want to plot.
+        c : String representing a color
+            Color of the circles we want to plot.
+
+        Returns
+        -------
+        None.
+        Plot the data with circles.
+
+        """
         self.fig.circle(x=a,y=b,color=c)
     
     def displayRoomInfo(self,name,number):
+        """
+        Parameters
+        ----------
+        name : String
+            Name of the room.
+        number : Int
+            Integer representing the number of people in the room.
+
+        Returns
+        -------
+        None.
+        Plot the number of people in the room
+
+        """
         st.sidebar.write('{}: {} people'.format(name,number))
     
     def plot(self):
+        """
+        Returns
+        -------
+        None.
+        Plot everything.
+
+        """
         st.bokeh_chart(self.fig)
