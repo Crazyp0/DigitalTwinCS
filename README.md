@@ -18,14 +18,11 @@ We used:
 ## How to run the project?
 First, the latest version of Bokeh that is compatible with Streamlit is the version 2.2.2 with the command `pip install bokeh==2.2.2`.
 
-With the command `streamlit run main.py` in the anaconda command prompt located in the project file. A page will open in a browser, with the plot of the building that we designed (with 2 floors, and some rooms in each floor). If Streamlit is not installed, check https://docs.streamlit.io/library/get-started/installation
+With the command `streamlit run main.py` in the command prompt located in the project file. A page will open in a browser, with the plot of the building that we designed (with 2 floors, and some rooms in each floor). 
 
 In the sidebar, one can choose the floor that is ploted. There is the number of people in each area of the floor.
 
-In the main space, one can choose the number of people that are on each floor. There is the plot of the floor. The circles represent peoples. Each color is a cluster of an area.
-
-![image](https://user-images.githubusercontent.com/90897781/140501131-92794205-2f31-4433-878d-c3b925be3f83.png)
-
+In the main space, one can choose the number of people that are on each floor. There is the plot of the floor. The circles represent the peoples. Each color is a cluster of an area.
 
 ## How to modify the building?
 In the main file:
@@ -35,7 +32,5 @@ permit to add a floor or to modify it if it already exists.
 
 `r=Room(length,width,x-coordinate of the bottom-left corner,y-coordinate of the bottom left corner,name)`
 `f.addRoom(r)` permit to add a room on the floor f.
-
-`Room.addDoorOnAWall(positionOnWall,longueurDoor,direction)`to add a door on a wall in a room.
 
 These commands can be added/modified in the main to design the building.
