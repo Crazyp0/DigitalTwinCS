@@ -20,12 +20,12 @@ Please copy the content of this form to your own repository and tick ([X]) the b
 
 [x] I document the code of my project.
 
-[ ] I document the project itself.
+[x] I document the project itself (readme)
 
 
 # Test-driven development
 
-[x] I include some tests with my project. 
+[x] I include some tests with my project (all the .py files with "unittest")
 
 [x] My tests cover all the source code developed.
 
