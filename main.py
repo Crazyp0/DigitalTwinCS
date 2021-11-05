@@ -66,19 +66,40 @@ f2.addRoom(r12)
 f2.addRoom(r13)
 f2.addRoom(r6)
 
-
 list_floors=[i.floorNb for i in b.floors]
 
 #sliders for the graphical interface
 nbPeople=np.zeros(len(list_floors))
 for k in range(len(list_floors)):
     nbPeople[k] =st.slider("Number of people in the floor{}".format(k+1), min_value=0,max_value=1000, value=200)
-
+#creation of the UIManager which will plot all the graphic part
 plotMng=UiManager(list_floors)
+#creation of the peopleManager which will create people and calculate clusters
 peopleMng=PeopleManager(plotMng) 
+#plot the building
 plotMng.plotFloor(b.floors[plotMng.getOption()-1])
+#generate people
 peopleMng.generatePeople(nbPeople,b.floors)  
+#calculate cluster
 peopleMng.calculateCluster(b, plotMng.getOption(), )
+#show graph
 
+#Set up door
+r.addDoorOnAWall(50, 10, 3)
+r2.addDoorOnAWall(50, 10, 3)
+r3.addDoorOnAWall(160, 10, 3)
+r3.addDoorOnAWall(70, 10, 3)
+r4.addDoorOnAWall(100, 10, 2)
+r5.addDoorOnAWall(25,10,3)
+r6.addDoorOnAWall(25,10,0)
+
+r9.addDoorOnAWall(75,10,1)
+r9.addDoorOnAWall(35,10,3)
+r9.addDoorOnAWall(100,10,3)
+r10.addDoorOnAWall(30,10,3)
+r10.addDoorOnAWall(60,10,3)
+
+#plot
+plotMng.plotDoors(b.floors)
 plotMng.plot()       
 

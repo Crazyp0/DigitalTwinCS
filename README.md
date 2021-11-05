@@ -36,4 +36,6 @@ permit to add a floor or to modify it if it already exists.
 `r=Room(length,width,x-coordinate of the bottom-left corner,y-coordinate of the bottom left corner,name)`
 `f.addRoom(r)` permit to add a room on the floor f.
 
+`Room.addDoorOnAWall(positionOnWall,longueurDoor,direction)`to add a door on a wall in a room.
+
 These commands can be added/modified in the main to design the building.

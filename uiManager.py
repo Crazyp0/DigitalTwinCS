@@ -148,6 +148,15 @@ class UiManager:
         """
         st.sidebar.write('{}: {} people'.format(name,number))
     
+    def plotDoors(self,listFloors):
+        for k in listFloors:
+            for i in k.rooms:
+                for l in i.list_of_wall:
+                    for p in l.doors:
+                        self.plotDoor(p)
+        
+        
+    
     def plot(self):
         """
         Returns
