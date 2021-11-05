@@ -22,9 +22,9 @@ With the command `streamlit run main.py` in the anaconda command prompt located 
 
 In the sidebar, one can choose the floor that is ploted. There is the number of people in each area of the floor.
 
-In the main space, one can choose the number of people that are on each floor. There is the plot of the floor. The circles represent peoples. Each color is a cluster of an area.
+In the main space, one can choose the number of people that are on each floor. There is the plot of the floor. The circles represent peoples. Each color is a cluster of an area. The red lines are the doors.
 
-![image](https://user-images.githubusercontent.com/90897781/140501131-92794205-2f31-4433-878d-c3b925be3f83.png)
+![image](https://user-images.githubusercontent.com/90897781/140567458-9b163e3c-b579-435b-b502-4bce7217e9cf.png)
 
 
 ## How to modify the building?
